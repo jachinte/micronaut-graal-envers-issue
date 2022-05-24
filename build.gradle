@@ -1,0 +1,23 @@
+plugins {
+    id "io.micronaut.application" version "3.3.2"
+}
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = "com.example.Application"
+}
+
+dependencies {
+    // micronaut-jdbc-hikari and hibernate-envers appear to collide somehow
+    // If you comment out one of them, the native executable runs successfully 
+    implementation "io.micronaut:micronaut-runtime"
+    implementation "io.micronaut.data:micronaut-data-hibernate-jpa"
+    implementation "io.micronaut.sql:micronaut-jdbc-hikari"
+    implementation "org.hibernate:hibernate-envers:5.5.9.Final"
+    runtimeOnly "org.postgresql:postgresql:42.2.5"
+}
+
+graalvmNative.toolchainDetection = false
